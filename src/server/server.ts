@@ -1,5 +1,5 @@
 import express from 'express';
-
+import path from 'path';
 export default class Server {
     
     public app: express.Application;
@@ -18,5 +18,12 @@ export default class Server {
         this.app.listen(this.port,()=>{
             console.log(`Server is running in the port ${this.port}`);
         });
+        this.publicFolder();
     }
+
+    private publicFolder(){
+        const publicPath = path.resolve( __dirname, '../public');
+        this.app.use( express.static(publicPath) );
+    }
+
 }
